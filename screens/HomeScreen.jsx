@@ -1,39 +1,25 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import { View, TextInput, Button, StyleSheet } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
-  const [text, setText] = useState("");
+  const [username, setUsername] = useState("");
 
-  const handleInputChange = (inputText) => {
-    setText(inputText);
-  };
-
-  const handleButtonPress = () => {
-    alert(`Text entered: ${text}`);
+  const handleSearch = () => {
+    navigation.navigate("Details", { username });
   };
 
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Check username"
-        onPress={() => navigation.navigate("Details")}
-      />
       <TextInput
-        label="Enter username"
-        value={text}
-        onChangeText={handleInputChange}
+        placeholder="Enter GitHub Username"
+        value={username}
+        onChangeText={setUsername}
         style={styles.input}
       />
-      <Button mode="contained" onPress={() => navigation.navigate("Details")}>
-        Check username
-      </Button>
+      <Button title="Search" onPress={handleSearch} />
     </View>
   );
 };
-
-export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -43,7 +29,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   input: {
-    width: "70%",
+    width: "100%",
     marginBottom: 20,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
   },
 });
+
+export default HomeScreen;
