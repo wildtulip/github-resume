@@ -10,9 +10,20 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: "GitHub Search" }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={({ route }) => ({
+            title: route.params.username,
+            headerBackTitleVisible: false,
+          })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
